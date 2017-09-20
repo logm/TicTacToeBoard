@@ -19,13 +19,24 @@ TicTacToeBoard::TicTacToeBoard()
 **/
 Piece TicTacToeBoard::toggleTurn()
 {
-  return Invalid;
+  // if (getWinner() != Invalid) {
+  //   return getWinner();
+  // }
+  if (turn == X) {
+    turn = O;
+    return turn;
+  } else  if (turn == O) {
+    turn = X;
+    return turn;
+  } else {
+    return Invalid;
+  }
 }
 
 /**
  * Places the piece of the current turn on the board, returns what
  * piece is placed, and toggles which Piece's turn it is. placePiece does 
- * NOT allow to place a piece in a location where there is already a piece.
+ * NOT allow to place a piece in a location where there is already a 
  * In that case, placePiece just returns what is already at that location. 
  * Out of bounds coordinates return the Piece Invalid value. When the game
  * is over, no more pieces can be placed so attempting to place a piece
@@ -33,7 +44,14 @@ Piece TicTacToeBoard::toggleTurn()
 **/ 
 Piece TicTacToeBoard::placePiece(int row, int column)
 {
-  return Invalid;
+  if (row > (BOARDSIZE - 1) || row < 0 || column > (BOARDSIZE - 1) || column < 0 ) { //out of bounds
+    return Invalid;
+  } else if(getPiece(row, column) != Blank)  { //Piece already there
+    return Invalid;
+  }
+  board[row][column] = turn;
+  //toggleTurn();
+  return board[row][column];
 }
 
 /**
@@ -42,7 +60,12 @@ Piece TicTacToeBoard::placePiece(int row, int column)
 **/
 Piece TicTacToeBoard::getPiece(int row, int column)
 {
-  return Invalid;
+  if (row > 2 || row < 0 || column > 2 || column < 0 ) { //out of bounds
+    return Invalid;
+  } else if(getPiece(row, column) == Blank)  { //Piece already there
+    return Blank;
+  }
+  return board[row][column];
 }
 
 /**
@@ -51,5 +74,67 @@ Piece TicTacToeBoard::getPiece(int row, int column)
 **/
 Piece TicTacToeBoard::getWinner()
 {
-  return Invalid;
+    if (
+    (getPiece(0,0) == getPiece(1,0)) &&  (getPiece(1,0) == getPiece(2,0)) ) //first column winner
+    ) { return getPiece(0,0); 
+    } else if (
+    (getPiece(0,1) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(2,1))) //middle column winner
+    ) { return getPiece(0,1); 
+    } else if (
+    (getPiece(0,2) == getPiece(1,2)) &&  (getPiece(1,2) == getPiece(2,2)) ) //last column winner
+    ) { return getPiece(0,2); 
+    } else if (
+    (getPiece(0,0) == getPiece(0,1)) &&  (getPiece(0,1) == getPiece(0,2)) ) //first row winner
+    ) { return getPiece(0,0); 
+    } else if (
+    (getPiece(1,0) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(1,2))) //middle row winner
+    ) { return getPiece(1,0); 
+    } else if (
+    (getPiece(2,0) == getPiece(2,1)) &&  (getPiece(2,1) == getPiece(2,2)) ) //last row winner
+    ) { return getPiece(2,0); 
+    } else if (
+    (getPiece(0,0) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(2,2)) ) //decreasing diagonal winner
+    ) { return getPiece(0,0); 
+    } else if (
+    (getPiece(0,2) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(2,0)) ) //increasing diagonal winner
+    ) { return getPiece(0,2); 
+    } else {
+      return Invalid;
+    }
 }
+
+/* Correct get winner function
+
+
+Piece TicTacToeBoard::getWinner()
+{
+    if (
+    (getPiece(0,0) == getPiece(1,0)) &&  (getPiece(1,0) == getPiece(2,0)) && (getPiece(0,0) != Blank) //first column winner
+    ) { return getPiece(0,0); 
+    } else if (
+    (getPiece(0,1) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(2,1)) && (getPiece(0,1) != Blank) //middle column winner
+    ) { return getPiece(0,1); 
+    } else if (
+    (getPiece(0,2) == getPiece(1,2)) &&  (getPiece(1,2) == getPiece(2,2)) && (getPiece(0,2) != Blank) //last column winner
+    ) { return getPiece(0,2); 
+    } else if (
+    (getPiece(0,0) == getPiece(0,1)) &&  (getPiece(0,1) == getPiece(0,2)) && (getPiece(0,1) != Blank) //first row winner
+    ) { return getPiece(0,0); 
+    } else if (
+    (getPiece(1,0) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(1,2)) && (getPiece(1,1) != Blank) //middle row winner
+    ) { return getPiece(1,0); 
+    } else if (
+    (getPiece(2,0) == getPiece(2,1)) &&  (getPiece(2,1) == getPiece(2,2)) && (getPiece(2,1) != Blank) //last row winner
+    ) { return getPiece(2,0); 
+    } else if (
+    (getPiece(0,0) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(2,2)) && (getPiece(0,0) != Blank) //decreasing diagonal winner
+    ) { return getPiece(0,0); 
+    } else if (
+    (getPiece(0,2) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(2,0)) && (getPiece(0,2) != Blank) //increasing diagonal winner
+    ) { return getPiece(0,2); 
+    } else {
+      return Invalid;
+    }
+}
+
+*/
