@@ -72,31 +72,36 @@ Piece TicTacToeBoard::getPiece(int row, int column)
  * Returns which Piece has won, if there is a winner, Invalid if the game
  * is not over, or Blank if the board is filled and no one has won.
 **/
+
+/**
+ * BUG: Returns Blank winner if there are 3 blanks next to each other
+**/
+
 Piece TicTacToeBoard::getWinner()
 {
     if (
-    (getPiece(0,0) == getPiece(1,0)) &&  (getPiece(1,0) == getPiece(2,0)) ) //first column winner
+    ((getPiece(0,0) == getPiece(1,0)) &&  (getPiece(1,0) == getPiece(2,0)) ) //first column winner
     ) { return getPiece(0,0); 
     } else if (
-    (getPiece(0,1) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(2,1))) //middle column winner
+    ((getPiece(0,1) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(2,1))) //middle column winner
     ) { return getPiece(0,1); 
     } else if (
-    (getPiece(0,2) == getPiece(1,2)) &&  (getPiece(1,2) == getPiece(2,2)) ) //last column winner
+    ((getPiece(0,2) == getPiece(1,2)) &&  (getPiece(1,2) == getPiece(2,2)) ) //last column winner
     ) { return getPiece(0,2); 
     } else if (
-    (getPiece(0,0) == getPiece(0,1)) &&  (getPiece(0,1) == getPiece(0,2)) ) //first row winner
+    ((getPiece(0,0) == getPiece(0,1)) &&  (getPiece(0,1) == getPiece(0,2)) ) //first row winner
     ) { return getPiece(0,0); 
     } else if (
-    (getPiece(1,0) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(1,2))) //middle row winner
+    ((getPiece(1,0) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(1,2))) //middle row winner
     ) { return getPiece(1,0); 
     } else if (
-    (getPiece(2,0) == getPiece(2,1)) &&  (getPiece(2,1) == getPiece(2,2)) ) //last row winner
+    ((getPiece(2,0) == getPiece(2,1)) &&  (getPiece(2,1) == getPiece(2,2)) ) //last row winner
     ) { return getPiece(2,0); 
     } else if (
-    (getPiece(0,0) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(2,2)) ) //decreasing diagonal winner
+    ((getPiece(0,0) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(2,2)) ) //decreasing diagonal winner
     ) { return getPiece(0,0); 
     } else if (
-    (getPiece(0,2) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(2,0)) ) //increasing diagonal winner
+    ((getPiece(0,2) == getPiece(1,1)) &&  (getPiece(1,1) == getPiece(2,0)) ) //increasing diagonal winner
     ) { return getPiece(0,2); 
     } else {
       return Invalid;
@@ -104,8 +109,6 @@ Piece TicTacToeBoard::getWinner()
 }
 
 /* Correct get winner function
-
-
 Piece TicTacToeBoard::getWinner()
 {
     if (
@@ -136,5 +139,4 @@ Piece TicTacToeBoard::getWinner()
       return Invalid;
     }
 }
-
 */

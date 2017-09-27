@@ -98,3 +98,8 @@ TEST(TicTacToeBoardTest, DiagonalWinner) {
 	tic.placePiece(2,2);//X
 	ASSERT_TRUE(X == tic.getWinner()); //Diagonal winner
 }
+//This is my new Coverage Test
+TEST(TicTacToeBoardTest, BlankWinner) {
+	TicTacToeBoard tic;
+	ASSERT_FALSE(Blank == tic.getWinner());
+}
