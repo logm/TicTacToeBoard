@@ -44,13 +44,13 @@ Piece TicTacToeBoard::toggleTurn()
 **/ 
 Piece TicTacToeBoard::placePiece(int row, int column)
 {
-  if (row > (BOARDSIZE - 1) || row < 0 || column > (BOARDSIZE - 1) || column < 0 ) { //out of bounds
+  if (row >= BOARDSIZE || row < 0 || column >= BOARDSIZE || column < 0 ) { //out of bounds
     return Invalid;
   } else if(getPiece(row, column) != Blank)  { //Piece already there
     return Invalid;
   }
   board[row][column] = turn;
-  //toggleTurn();
+  toggleTurn();
   return board[row][column];
 }
 
@@ -60,11 +60,9 @@ Piece TicTacToeBoard::placePiece(int row, int column)
 **/
 Piece TicTacToeBoard::getPiece(int row, int column)
 {
-  if (row > 2 || row < 0 || column > 2 || column < 0 ) { //out of bounds
+  if (row >= BOARDSIZE || row < 0 || column >= BOARDSIZE  || column < 0 ) { //out of bounds
     return Invalid;
-  } else if(getPiece(row, column) == Blank)  { //Piece already there
-    return Blank;
-  }
+  } 
   return board[row][column];
 }
 
@@ -76,7 +74,7 @@ Piece TicTacToeBoard::getPiece(int row, int column)
 /**
  * BUG: Returns Blank winner if there are 3 blanks next to each other
 **/
-
+/** BUGGED GET WINNER FUNCTION
 Piece TicTacToeBoard::getWinner()
 {
     if (
@@ -107,8 +105,8 @@ Piece TicTacToeBoard::getWinner()
       return Invalid;
     }
 }
-
-/* Correct get winner function
+**/
+///* Correct get winner function
 Piece TicTacToeBoard::getWinner()
 {
     if (
@@ -139,4 +137,4 @@ Piece TicTacToeBoard::getWinner()
       return Invalid;
     }
 }
-*/
+//*/
